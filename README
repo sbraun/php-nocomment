@@ -1,0 +1,64 @@
+NoComment
+=========
+
+NoComment is a library for automatic adding phpdoc comments in PHP source file.
+
+This tool had been designed to speed up the cleaning of same crappy and sub-documented code.
+
+# License
+
+All files contained in this archive are licensed as stated in the LICENSE file.
+
+If you find any bugs please feel free and send an e-mail to sebastien.braun@troll-idees.com
+
+Future versions of this code can be downloaded from:
+https://github.com/sbraun/php-nocomment
+
+Thanks for taking the time to download this code. If you have any questions
+please feel free to contact me.
+
+- Sebastien Braun <sebastien.braun@troll-idees.com>
+
+# Install
+
+Just include nocomment.php file. No dependencies.
+
+# Utilisation
+
+## Add page-level DocBlock comment to a file
+Function addFileComment() parse a php file and add or update any page-level DocBlock. Here is a quick sample code to use it : 
+
+<?php
+$NoComment = new NoComment();
+
+// Update or create file global comment
+$comments = array(
+				  'version'=>'1.0',
+				  'copyright'=>"Copyright (c) 2011 Me."
+				  );
+$src = $NoComment->addFileComment('file_to_comment', $comments);
+if ($src !== NULL && $src !== false) {
+	file_put_contents('file_documented.php', $src);
+}
+
+?>
+
+See tests/test_1.php, for a more complete example.
+
+## Add phpdoc to all undocumented functions
+
+Function addFctComment() parse a php file and return a documented version. The arguments of the functions in source code are recognized and tags "@param" are generated. 
+All comments include "@todo Comment" to recognize and easy find them. Here is a quick sample code to use it : 
+
+<?php 
+$NoComment = new NoComment();
+
+// Add Comment to all undocumented functions
+$src = $NoComment->addFctComment('file_to_comment.php');
+if ($src !== NULL && $src !== false) {
+	file_put_contents('file_documented.php', $src);
+}
+
+?>
+
+See tests/test_2.php, for a more complete example.
